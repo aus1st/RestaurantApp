@@ -1,0 +1,57 @@
+<form #form="ngForm" autocomplete="off" *ngIf="orderService.formData">
+    <div class="flex justify-center">
+        <div class="p-5 items-center w-10/12">
+            <h1 class="text-xl font-bold">Order</h1>
+
+            <div class="flex gap-x-5">
+                <div class="my-5 w-full">
+                    <label for="orderNo">Order No</label>
+                    <div class="flex items-center justify-center ">
+                        <span class="bg-gray-100 p-[9px]"><i class="fa fa-hashtag fa-md"></i></span>
+                        <input type="text" #OrderNo="ngModel" id="OrderNo" class="p-2 w-full border"
+                            [(ngModel)]="orderService.formData.OrderNo" name="OrderNo" disabled="true">
+                    </div>
+                </div>
+
+
+                <div class="my-5 w-full">
+                    <label for="CustomerId">Customer</label>
+                    <select id="CustomerId" #CustomerId="ngModel" class="p-2 w-full border"
+                        [(ngModel)]="orderService.formData.CustomerId" name="CustomerId">
+                        <option value="0">--Select Customer --</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="flex gap-x-5">
+                <div class="my-5 w-full">
+                    <label for="PMethod">Payment Method</label>
+                    <select id="PMethod" #PMethod="ngModel" class="p-2 w-full border"
+                        [(ngModel)]="orderService.formData.PMethod" name="PMethod">
+                        <option value="0">--Select Method --</option>
+                        <option value="cash">Cash</option>
+                        <option value="card">Card</option>
+                    </select>
+                </div>
+                <div class="my-5 w-full">
+                    <label for="GTotal">Grand Total</label>
+                    <div class="flex items-center justify-center ">
+                        <span class="bg-gray-100 p-[9px]"><i class="fa fa-dollar-sign fa-md"></i></span>
+                        <input type="text" #GTotal="ngModel" id="GTotal" class="p-2 w-full border"
+                            [(ngModel)]="orderService.formData.GTotal" name="GTotal" disabled="true">
+                    </div>
+                </div>
+            </div>
+
+            <!-- order items  -->
+            <app-item-dtls [orderId]="orderService.formData.OrderId"></app-item-dtls>
+
+
+            <div class="text-right">
+                <button type="submit" class="px-4 py-2 bg-black rounded-md text-white">
+                    <i class="fa fa-database"></i>
+                    Submit</button>
+            </div>
+        </div>
+    </div>
+</form>

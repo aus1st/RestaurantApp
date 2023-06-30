@@ -1,0 +1,77 @@
+<form (submit)="onSubmit(itemsForm)" #itemsForm="ngForm">
+    <input type="hidden" #ItemName="ngModel" [(ngModel)]="formData.ItemName" name="ItemName">
+    <input type="hidden" #OrderId="ngModel" [(ngModel)]="formData.OrderId" name="OrderId">
+    <table class="w-full text-sm text-gray-500">
+        <thead class="text-gray-700 text-left uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-10 py-3">
+                    <label for="Food">Food</label>
+                    <select [(ngModel)]="formData.ItemId" name="ItemId" id="ItemId" #ItemId="ngModel"
+                        class="py-2 px-10 w-full border" (change)="getPrice($event.target)">
+                        <option value="0">Select</option>
+                        <option *ngFor="let i of items" value="{{i.ItemId}}">{{i.ItemName}}</option>
+                    </select>
+                </th>
+
+                <th class="px-3 py-3">
+                    <label for="Qty">Qty</label>
+                    <input (keyup)="updateAmount()" type="text" #Qty="ngModel" id="Qty" class="p-2 w-full border"
+                        [(ngModel)]="formData.Qty" name="Qty">
+                </th>
+
+                <th scope="col" class="px-2 py-3">
+                    <label for="Price">Price</label>
+                    <input type="text" #Price="ngModel" id="Price" class="p-2 w-full border"
+                        [(ngModel)]="formData.Price" name="Price" readonly>
+                </th>
+
+
+                <th scope="col" class="px-2 py-3">
+                    <label for="Price">Total</label>
+                    <input type="text" #Total="ngModel" id="Total" class="p-2 w-full border"
+                        [(ngModel)]="formData.Total" name="Total" readonly>
+                </th>
+                <th scope="col" class="px-2 py-2">
+                    <button href="" class="bg-green-600 text-white px-4 py-2 mt-5">
+                        Add
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="orderService.orderItems.length == 0" class="italic text-center">
+                <td colspan="4"> No Items Selected</td>
+            </tr>
+
+            <tr *ngFor="let item of orderService.orderItems; let i = index">
+                <td scope="col" class="px-3 py-3">
+                    <select [(ngModel)]="item.ItemId" [name]="item.ItemId.toString()" [id]="item.ItemId"
+                        #ItemId="ngModel" class="py-2 px-10 w-full border" (change)="getPrice($event.target)">
+                        <option value="0">Select</option>
+                        <option *ngFor="let i of items" value="{{i.ItemId}}">{{i.ItemName}}</option>
+                    </select>
+                </td>
+                <td>
+                    <input (keyup)="updateAmount()" type="text" #Qty="ngModel" [id]="item.Qty+'_Qty_'+i"
+                        class="p-2 w-full border" [(ngModel)]="item.Qty" [name]="item.Qty+'_Qty_'+i">
+                </td>
+                <td>
+                    <input type="text" #Price="ngModel" [id]="item.Price+'_Price_'+i" class="p-2 w-full border"
+                        [(ngModel)]="item.Price" [name]="item.Price+'_Price_'+i" readonly>
+                </td>
+                <td> <input type="text" #Total="ngModel" [id]="item.Total+'_Total_'+i" class="p-2 w-full border"
+                        [(ngModel)]="item.Total" [name]="item.Total+'_Total_'+i" readonly></td>
+                <td>
+                    <div class="flex">
+                        <button type="button" class=" text-white px-4 py-2 font-thin rounded-lg">
+                            📝
+                        </button>
+                        <button type="button" class="text-white px-4 py-2 font-thin rounded-lg">
+                            ❌
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
