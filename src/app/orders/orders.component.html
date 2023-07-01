@@ -1,1 +1,37 @@
-<p class="font-bold">my Orders</p>
+<div class="flex items-center justify-center">
+    <div>
+        <table class="text-gray-500 w-full">
+            <thead class="text-gray-700 p-3 text-left uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+
+                <!-- <th scope="col" class="py-3 px-3">OrderId</th> -->
+                <th scope="col" class="py-3 px-3">OrderNo</th>
+                <th scope="col" class="py-3 px-6">Customer</th>
+                <th scope="col" class="py-3 px-3">Payment Method</th>
+                <th scope="col" class="py-3 px-3">Total</th>
+                <th scope="col" class="py-4 px-10">
+                    <a routerLink="/order" class="bg-green-600 text-white px-4 hover:bg-green-500 py-2 mt-5 rounded-md">
+                        <i class="fa-solid fa-plus"></i> Create
+                    </a>
+                </th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let o of orderList" class="border-b">
+
+                    <td>{{o.OrderNo}}</td>
+                    <td class="py-3 px-4">{{o.Customer}}</td>
+                    <td class="text-center">{{o.PMethod}}</td>
+                    <td class="text-right">{{o.GTotal}}</td>
+                    <td class="text-center">
+                        <button type="button" (click)="openForEdit(o.OrderId)" class="px-4 py-2 font-thin rounded-lg">
+                            <i class="fa-solid fa-pen text-orange-500"></i>
+                        </button>
+
+                        <button type="button" (click)="deleteOrder(o.OrderId)" class="px-4 py-2 font-thin rounded-lg">
+                            <i class="fa-solid fa-trash text-red-600"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>

@@ -10,7 +10,9 @@ export class ItemService {
 
   constructor(private http: HttpClient) { }
 
-  getItems() {
-    return this.http.get(`${environment.apiURL}/api/items`).toPromise()
+  async getItems() {
+    //return this.http.get(`${environment.apiURL}/api/items`).toPromise()
+    const res = fetch(`${environment.apiURL}/api/items`);
+    return (await res).json();
   }
 }

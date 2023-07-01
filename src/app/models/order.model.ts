@@ -1,8 +1,10 @@
 export interface Order {
-    OrderId: number,
-    CustomerId: number
+    OrderId: number | null,
+    CustomerId: number,
     OrderNo: string,
     PMethod: string,
-    GTotal: number
+    GTotal: number,
+    //CustomerName: ''
+    DeletedEntries: string
 }
 

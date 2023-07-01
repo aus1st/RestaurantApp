@@ -10,6 +10,8 @@ import { OrderService } from './shared/order.service';
 import { FormsModule } from '@angular/forms';
 import { ItemDtlsComponent } from './components/item-dtls/item-dtls.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { ToastrModule, provideToastr } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -17,15 +19,20 @@ import { HttpClientModule } from '@angular/common/http';
     OrdersComponent,
     OrderComponent,
     OrderItemsComponent,
-    ItemDtlsComponent
+    ItemDtlsComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [OrderService],
+  providers: [OrderService,
+    provideAnimations(), // required animations providers
+    provideToastr()], // Toastr providers],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
